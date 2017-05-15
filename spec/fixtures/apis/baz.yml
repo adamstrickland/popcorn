@@ -1,0 +1,30 @@
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Baz API
+
+paths:
+  include:
+    - baz.yml
+  /bazs:
+    get:
+      description: placeholder
+      tags:
+        - nonsense
+      responses:
+        200:
+          description: list of bazs
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/baz'
+
+definitions:
+  baz:
+    type: object
+    properties:
+      name:
+        type: string
+

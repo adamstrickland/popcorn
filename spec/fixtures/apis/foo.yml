@@ -1,0 +1,14 @@
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Foo API
+
+paths:
+  include:
+    - foo.yml
+
+definitions:
+  include:
+    - foo.yml

@@ -1,0 +1,7 @@
+server:
+  build: ./vendor
+  ports:
+    - "3000:80"
+  volumes:
+    - ./swagger.json:/usr/share/nginx/html/swagger.json
+  working_dir: /usr/share/nginx/html

@@ -1,0 +1,10 @@
+/bazs/{id}:
+  get:
+    description: a single baz
+    tags:
+      - nonsense
+    responses:
+      200:
+        description: the details of the baz
+        schema:
+          $ref: '#/definitions/baz'

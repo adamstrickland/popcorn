@@ -1,0 +1,28 @@
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Bar API
+
+paths:
+  /bars:
+    get:
+      description: placeholder
+      tags:
+        - nonsense
+      responses:
+        200:
+          description: list of bars
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/bar'
+
+definitions:
+  bar:
+    type: object
+    properties:
+      name:
+        type: string
+

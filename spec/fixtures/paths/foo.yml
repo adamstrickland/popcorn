@@ -1,0 +1,22 @@
+/foos:
+  get:
+    description: placeholder
+    tags:
+      - nonsense
+    responses:
+      200:
+        description: list of foos
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/foo'
+/foos/{id}:
+  get:
+    description: a single foo
+    tags:
+      - nonsense
+    responses:
+      200:
+        description: the details of the foo
+        schema:
+          $ref: '#/definitions/foo'
