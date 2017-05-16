@@ -1,5 +1,7 @@
 require "spec_helper"
 
+require "tempfile"
+
 describe Popcorn::ApiDef do
   let(:klass) { described_class }
   let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures")) }
@@ -199,28 +201,45 @@ describe Popcorn::ApiDef do
     let(:api_name) { "foo" }
     let(:dir) { File.join(root, "paths") }
 
-    before do
-      files.each do |file|
-        expect(File).to exist(file)
+    context "when the file(s) exist" do
+      before do
+        files.each do |file|
+          expect(File).to exist(file)
+        end
+      end
+
+      context "when there is one file" do
+        let(:files) { [File.join(dir, "#{api_name}.yml")] }
+
+        it "should parse a set of yaml files into a single hash of the data" do
+          expect(subject).to be_a Hash
+        end
+      end
+
+      context "when there are multiple files" do
+        let(:files) do
+          %w[quux quuux].map{ |f| File.join(dir, "#{f}.yml") }
+        end
+
+        it "should parse a set of yaml files into a single hash of the data" do
+          expect(subject).to be_a Hash
+        end
+      end
+
+      context "when a file is empty" do
+        let(:file) { Tempfile.new }
+        let(:files){ [File.expand_path(file)] }
+
+        after { file.unlink }
+
+        it { expect{ subject }.to raise_error "Invalid YAML file" }
       end
     end
 
-    context "when there is one file" do
-      let(:files) { [File.join(dir, "#{api_name}.yml")] }
+    context "when the file(s) don't exist" do
+      let(:files){ [File.expand_path("./nonexistent_file.yml")] }
 
-      it "should parse a set of yaml files into a single hash of the data" do
-        expect(subject).to be_a Hash
-      end
-    end
-
-    context "when there are multiple files" do
-      let(:files) do
-        %w[quux quuux].map{ |f| File.join(dir, "#{f}.yml") }
-      end
-
-      it "should parse a set of yaml files into a single hash of the data" do
-        expect(subject).to be_a Hash
-      end
+      it { expect{ subject }.to raise_error %r{Non-existent file} }
     end
   end
 end

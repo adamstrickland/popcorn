@@ -12,8 +12,7 @@ module Popcorn
     def initialize(srcroot, definition)
       @srcroot = srcroot
       @defloc = definition
-      content = File.read(@defloc)
-      @representation = YAML.load(content)
+      @representation = ApiDef.yamlize(@defloc)
       @filename = File.basename(@defloc)
     end
 
@@ -60,10 +59,18 @@ module Popcorn
     def self.parse(files)
       return {} if files.nil?
 
-      files.map do |f|
-        content = File.read(f)
-        YAML.load(content)
-      end.inject(&:merge)
+      yamlized_files = files.map do |f|
+        yamlize(f)
+      end
+
+      raise "Invalid YAML file" unless yamlized_files.all?
+
+      yamlized_files.inject(&:merge)
+    end
+
+    def self.yamlize(file)
+      raise "Non-existent file at #{file}" unless File.exist?(file)
+      YAML.load(File.read(file))
     end
 
     private
