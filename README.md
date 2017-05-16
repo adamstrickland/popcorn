@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/adamstrickland/popcorn.svg?branch=master)](https://travis-ci.org/adamstrickland/popcorn)
+[![Build Status](https://travis-ci.org/adamstrickland/popcorn.svg?branch=master)](https://travis-ci.org/adamstrickland/popcorn) [![Code Climate](https://codeclimate.com/github/adamstrickland/popcorn/badges/gpa.svg)](https://codeclimate.com/github/adamstrickland/popcorn) [![Test Coverage](https://codeclimate.com/github/adamstrickland/popcorn/badges/coverage.svg)](https://codeclimate.com/github/adamstrickland/popcorn/coverage) [![Issue Count](https://codeclimate.com/github/adamstrickland/popcorn/badges/issue_count.svg)](https://codeclimate.com/github/adamstrickland/popcorn/issues)
 
 # Popcorn
 
