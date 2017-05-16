@@ -120,6 +120,7 @@ module Popcorn
       File.open(path, "w") do |io|
         io.write(content)
       end
+      FileUtils.chmod("a-x", path)
       path
     end
 

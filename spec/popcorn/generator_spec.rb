@@ -103,6 +103,8 @@ describe Popcorn::Generator do
       end.first
       expect(actual).to eql content
     end
+
+    it { expect(File).not_to be_executable path }
   end
 
   describe "#_api_defs" do
