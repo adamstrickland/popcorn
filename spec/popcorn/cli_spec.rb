@@ -58,7 +58,7 @@ describe Popcorn::Cli do
 
     context "with no options" do
       it_should_behave_like :base_generation
-      it_should_behave_like :file_generation, 4
+      it_should_behave_like :file_generation, 5
       it_should_behave_like :multi_file_generation
     end
 
@@ -74,7 +74,7 @@ describe Popcorn::Cli do
       let(:arguments) { [src, dest, "--swagger"] }
 
       it_should_behave_like :base_generation
-      it_should_behave_like :file_generation, 5
+      it_should_behave_like :file_generation, 6
       it_should_behave_like :swagger_generation
     end
   end

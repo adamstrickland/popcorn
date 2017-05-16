@@ -1,0 +1,10 @@
+/quuxs/{id}:
+  get:
+    description: a single quux
+    tags:
+      - nonsense
+    responses:
+      200:
+        description: the details of the quux
+        schema:
+          $ref: '#/definitions/quux'

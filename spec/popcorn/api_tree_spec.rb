@@ -7,7 +7,7 @@ describe Popcorn::ApiTree do
 
   context "#apis" do
     subject { instance.apis }
-    it { should have(3).items }
+    it { should have(4).items }
     it { expect(subject.map(&:title)).to include "Foo API", "Bar API", "Baz API" }
   end
 end

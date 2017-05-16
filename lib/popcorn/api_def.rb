@@ -60,10 +60,10 @@ module Popcorn
     def self.parse(files)
       return {} if files.nil?
 
-      {}.merge(*files.map do |p|
-        content = File.read(p)
+      files.map do |f|
+        content = File.read(f)
         YAML.load(content)
-      end)
+      end.inject(&:merge)
     end
 
     private

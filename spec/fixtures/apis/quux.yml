@@ -1,0 +1,16 @@
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Quux API
+
+paths:
+  include:
+    - quux.yml
+    - quuux.yml
+definitions:
+  include:
+    - quux.yml
+    - quuux.yml
+
