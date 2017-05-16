@@ -30,13 +30,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "rubygems", "~> 2.0"
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "rspec", "~> 3.6"
   spec.add_development_dependency "rspec-collection_matchers", "~> 1.1"
   spec.add_development_dependency "rubocop", "~> 0.48"
   spec.add_development_dependency "pry", "~> 0.10"
+  spec.add_development_dependency "simplecov", "~> 0.14"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
 
   spec.add_dependency "thor", "~> 0.19"
   spec.add_dependency "colorize", "~> 0.8"
