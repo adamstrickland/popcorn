@@ -7,7 +7,7 @@ describe Popcorn::Generator do
   let(:instance) { klass.new(apis, dest) }
 
   let(:dest) { Dir.mktmpdir("popcorn-generator-") }
-  let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures")) }
+  let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures/base_case")) }
   let(:api_def) { ::Popcorn::ApiDef.new(root, api_file) }
   let(:def_file) { "foo.yml" }
   let(:api_file) { File.join(root, "#{klass::API_DIR}/#{def_file}") }

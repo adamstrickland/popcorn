@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Popcorn::ApiTree do
-  let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures")) }
+  let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures/base_case")) }
   let(:klass) { described_class }
   let(:instance) { klass.new(root) }
 

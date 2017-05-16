@@ -17,7 +17,7 @@ describe Popcorn::Cli do
 
   describe "generate" do
     let(:command) { "generate" }
-    let(:src) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures")) }
+    let(:src) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures/base_case")) }
     let(:dest) { File.expand_path(File.join(File.dirname(__FILE__), "../../tmp/popcorn")) }
     let(:arguments) { [src, dest] }
 
