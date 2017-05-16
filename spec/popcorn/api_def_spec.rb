@@ -7,6 +7,47 @@ describe Popcorn::ApiDef do
   let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures")) }
   let(:instance) { klass.new(root, api_file) }
 
+  shared_examples_for :api_def do |defname, pathcount, filecount|
+    context "#definition" do
+      subject { instance.definition }
+      it { should be_a Hash }
+      it { expect(subject.keys).to include("swagger", "info", "paths", "definitions") }
+
+      it { expect(subject["paths"]).to be_a Hash }
+      it { expect(subject["paths"]).to have(pathcount).items }
+      it { expect(subject["paths"].keys).to include "/#{defname}s" }
+      it { expect(subject["definitions"].keys).to include defname }
+    end
+
+    context "#files" do
+      subject { instance.files }
+      it { should be_an Array }
+      it { should have(filecount).items }
+    end
+
+    context "#info" do
+      subject { instance.info }
+      it { should be_a Hash }
+      it { should have_at_least(2).items }
+      it { expect(subject.keys).to include "version", "title" }
+    end
+
+    context "#definitions" do
+      subject { instance.definitions }
+      it { should be_a Hash }
+      it { should have_at_least(1).items }
+      it { expect(subject.keys).to include defname }
+    end
+
+    context "#paths" do
+      subject { instance.paths }
+      it { should be_a Hash }
+      it { should have_at_least(1).items }
+      it { expect(subject.keys).to include "/#{defname}s" }
+      # it { expect(subject.keys).to include "/#{defname}s/{id}" }
+    end
+  end
+
   describe "when the api file includes other files" do
     let(:api_file) { File.join(root, "apis/#{api_name}.yml") }
     let(:definitions_file) { File.join(root, "definitions/#{api_name}.yml") }
@@ -14,72 +55,40 @@ describe Popcorn::ApiDef do
 
     subject { instance }
 
-    shared_examples_for :multi_file_api_def do
+    shared_examples_for :multi_file_api_def do |defname, pathcount, filecount|
       it { should respond_to :filename }
       it { should respond_to :content }
 
-      context "#definition" do
-        subject { instance.definition }
-        it { should be_a Hash }
-        it { expect(subject.keys).to include("swagger", "info", "paths", "definitions") }
-
-        it { expect(subject["paths"]).to be_a Hash }
-        it { expect(subject["paths"]).to have(2).items }
-        it { expect(subject["paths"].keys).to include "/foos" }
-        it { expect(subject["definitions"].keys).to include "foo" }
-      end
+      it_should_behave_like :api_def, defname, pathcount, filecount
 
       context "#files" do
         subject { instance.files }
-        it { should be_an Array }
-        it { should have(3).items }
         it { should include api_file, definitions_file, paths_file }
-      end
-
-      context "#info" do
-        subject { instance.info }
-        it { should be_a Hash }
-        it { should have(2).items }
-        it { expect(subject.keys).to include "version", "title" }
       end
 
       context "#definition_files" do
         subject { instance.definition_files }
         it { should be_an Array }
-        it { should have(1).items }
-        it { should eql [File.join(root, "definitions/foo.yml")] }
-      end
-
-      context "#definitions" do
-        subject { instance.definitions }
-        it { should be_a Hash }
-        it { should have(1).items }
-        it { expect(subject.keys).to include "foo" }
+        it { should have_at_least(1).items }
+        it { should include File.join(root, "definitions/#{defname}.yml") }
       end
 
       context "#path_files" do
         subject { instance.path_files }
         it { should be_an Array }
-        it { should have(1).items }
-        it { should eql [File.join(root, "paths/foo.yml")] }
-      end
-
-      context "#paths" do
-        subject { instance.paths }
-        it { should be_a Hash }
-        it { should have(2).items }
-        it { expect(subject.keys).to include "/foos", "/foos/{id}" }
+        it { should have_at_least(1).items }
+        it { should include File.join(root, "paths/#{defname}.yml") }
       end
     end
 
     context "one sub-file per category" do
       let(:api_name) { "foo" }
-      it_should_behave_like :multi_file_api_def
+      it_should_behave_like :multi_file_api_def, "foo", 2, 3
     end
 
     context "multiple sub-file per category" do
       let(:api_name) { "quux" }
-      # it_should_behave_like :multi_file_api_def
+      it_should_behave_like :multi_file_api_def, "quux", 3, 5
     end
   end
 
@@ -88,30 +97,7 @@ describe Popcorn::ApiDef do
 
     subject { instance }
 
-    context "#definition" do
-      subject { instance.definition }
-      it { should be_a Hash }
-      it { expect(subject.keys).to include("swagger", "info", "paths", "definitions") }
-
-      it { expect(subject["paths"]).to be_a Hash }
-      it { expect(subject["paths"]).to have(1).items }
-      it { expect(subject["paths"].keys).to include "/bars" }
-      it { expect(subject["definitions"].keys).to include "bar" }
-    end
-
-    context "#files" do
-      subject { instance.files }
-      it { should be_an Array }
-      it { should have(1).items }
-      it { should include api_file }
-    end
-
-    context "#info" do
-      subject { instance.info }
-      it { should be_a Hash }
-      it { should have(2).items }
-      it { expect(subject.keys).to include "version", "title" }
-    end
+    it_should_behave_like :api_def, "bar", 1, 1
 
     context "#definition_files" do
       subject { instance.definition_files }

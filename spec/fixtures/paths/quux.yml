@@ -1,3 +1,15 @@
+/quuxs:
+  get:
+    description: placeholder
+    tags:
+      - nonsense
+    responses:
+      200:
+        description: list of quuxs
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/quux'
 /quuxs/{id}:
   get:
     description: a single quux
