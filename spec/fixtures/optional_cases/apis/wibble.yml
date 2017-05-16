@@ -1,0 +1,74 @@
+swagger: '2.0'
+
+info:
+  version: "1.0.0"
+  title: Wibble API
+
+host: "wibble.com"
+basePath: "/"
+schemes:
+  - "http"
+  - "https"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+parameters:
+  wibbleParam:
+    name: wibble
+    in: query
+    description: a wibble
+    required: false
+    type: string
+    format: ""
+
+responses:
+  NotFound:
+    description: Entity Not Found
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: http://swagger.io/api/oauth/dialog
+    flow: implicit
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+
+security:
+  -
+    api_key: []
+  -
+    petstore_auth: 
+      - write:pets
+      - read:pets
+
+tags:
+  name: wibble
+  description: Something that wibbles
+
+externalDocs:
+  description: optional reading
+  url: www.google.com
+
+paths:
+  /wibbles:
+    get:
+      description: placeholder
+      tags:
+        - nonsense
+      responses:
+        200:
+          description: list of wibbles
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string

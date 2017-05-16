@@ -21,11 +21,11 @@ module Popcorn
     end
 
     def path_files
-      _pathify("paths", @representation["paths"]["include"])
+      _pathify("paths", _paths["include"])
     end
 
     def definition_files
-      _pathify("definitions", @representation["definitions"]["include"])
+      _pathify("definitions", _definitions["include"])
     end
 
     def info
@@ -36,12 +36,20 @@ module Popcorn
       info["title"]
     end
 
+    def _paths
+      @representation["paths"] || {}
+    end
+
     def paths
-      @representation["paths"].except("include").merge(ApiDef.parse(path_files))
+      _paths.except("include").merge(ApiDef.parse(path_files))
+    end
+
+    def _definitions
+      @representation["definitions"] || {}
     end
 
     def definitions
-      @representation["definitions"].except("include").merge(ApiDef.parse(definition_files))
+      _definitions.except("include").merge(ApiDef.parse(definition_files))
     end
 
     def definition

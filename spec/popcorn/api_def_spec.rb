@@ -4,7 +4,8 @@ require "tempfile"
 
 describe Popcorn::ApiDef do
   let(:klass) { described_class }
-  let(:root) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures/base_case")) }
+  let(:fixtures) { File.expand_path(File.join(File.dirname(__FILE__), "../fixtures")) }
+  let(:root) { File.join(fixtures, "base_case") }
 
   describe "instance methods" do
     let(:instance) { klass.new(root, api_file) }
@@ -132,23 +133,25 @@ describe Popcorn::ApiDef do
       end
     end
 
-    # describe "other cases" do
-    #   let(:api_file) { File.join(root, "apis/bar.yml") }
+    describe "other cases" do
+      let(:api_file) { File.join(fixtures, "optional_cases/apis/wibble.yml") }
 
-    #   subject { instance }
+      subject { instance.definition }
 
-    #   it_should_behave_like :api_def, "bar", 1, 1
-
-    #   context "#definition_files" do
-    #     subject { instance.definition_files }
-    #     it { should be_nil }
-    #   end
-
-    #   context "#path_files" do
-    #     subject { instance.path_files }
-    #     it { should be_nil }
-    #   end
-    # end
+      it "should not forget other top-level attributes" do
+        expect(subject.keys).to include "host"
+        expect(subject.keys).to include "basePath"
+        expect(subject.keys).to include "schemes"
+        expect(subject.keys).to include "consumes"
+        expect(subject.keys).to include "produces"
+        expect(subject.keys).to include "parameters"
+        expect(subject.keys).to include "responses"
+        expect(subject.keys).to include "securityDefinitions"
+        expect(subject.keys).to include "security"
+        expect(subject.keys).to include "tags"
+        expect(subject.keys).to include "externalDocs"
+      end
+    end
   end
 
   describe "class methods" do
