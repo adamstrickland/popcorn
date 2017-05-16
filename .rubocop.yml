@@ -43,3 +43,7 @@ Metrics/LineLength:
   Max: 150
 Metrics/ClassLength:
   Max: 200
+
+Security/Eval:
+  Exclude:
+    - "spec/spec_helper.rb"

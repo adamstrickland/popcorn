@@ -4,9 +4,8 @@ require "popcorn/generator"
 module Popcorn
   module Api
     def self.generate(src, dest, **options)
-      Generator.new(apis(src), dest).tap do |g|
-        g.generate!(options)
-      end
+      generator = Generator.new(apis(src), dest)
+      (generator.generate!(options) || []).flatten
     end
 
     def self.apis(src)
