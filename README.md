@@ -34,6 +34,33 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/wellmatchdev/popcorn.
 
+### ToDo
+
+The following is a quick list of things I want to do with this:
+
+- Add a validation command
+- Run a mock service based on the APIs
+- Containerize it so usage is as easy as
+
+  ```yaml
+  popcornui:
+    image: adamstrickland/popcorn:ui
+    ports:
+      - 80:3000
+    volumes:
+      - .:/src
+
+  popcornmockapi:
+    image: adamstrickland/popcorn:mockapi
+    ports:
+      - 80:3000
+    volumes:
+      - .:/src
+  ```
+
+- Support for examples and/or data-generators
+- Add commenting?
+
 
 ## License
 
