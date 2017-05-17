@@ -274,7 +274,7 @@ describe Popcorn::Generator do
 
     context "when an api group is supplied" do
       let(:context) { {apis: [file: "foo.yml", name: "Foo API"]} }
-      it { should match %r{<li>.+href="/swagger-ui.html\?url=/apis/foo.yml">Foo API.+} }
+      it { should match %r{<li>.+href="/swagger-ui.html\?url=\./apis/foo.yml">Foo API.+} }
     end
   end
 
