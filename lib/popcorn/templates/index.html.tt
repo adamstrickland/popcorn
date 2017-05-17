@@ -14,7 +14,7 @@
     <h1>APIs</h1>
     <ul>
       {{#apis}}
-      <li><a href="/swagger-ui.html?url=/apis/{{file}}">{{name}}</a></li>
+      <li><a href="/swagger-ui.html?url=./apis/{{file}}">{{name}}</a></li>
       {{/apis}}
     </ul>
   </body>
