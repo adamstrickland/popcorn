@@ -35,7 +35,7 @@ module Popcorn
       {
         "apis" => _api_defs.map do |f, n, _|
           {
-            "file" => File.join("apis", f),
+            "file" => f,
             "name" => n
           }
         end

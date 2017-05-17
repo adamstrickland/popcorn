@@ -226,7 +226,7 @@ describe Popcorn::Generator do
     let(:expected) do
       {
         "apis" => [
-          {"file" => "apis/foo.yml", "name" => "Foo API"}
+          {"file" => "foo.yml", "name" => "Foo API"}
         ]
       }
     end
