@@ -32,9 +32,14 @@ module Popcorn
     end
 
     def template_context
-      Hash[*_api_defs.map do |f, n, _|
-        [File.join("apis", f), n]
-      end.flatten]
+      {
+        "apis" => _api_defs.map do |f, n, _|
+          {
+            "file" => File.join("apis", f),
+            "name" => n
+          }
+        end
+      }
     end
 
     def api_registers

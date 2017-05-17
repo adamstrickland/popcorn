@@ -223,10 +223,19 @@ describe Popcorn::Generator do
 
   describe "#template_context" do
     subject { instance.template_context }
+    let(:expected) do
+      {
+        "apis" => [
+          {"file" => "apis/foo.yml", "name" => "Foo API"}
+        ]
+      }
+    end
     it { should be_a Hash }
     it { should have(1).item }
-    it { expect(subject.keys.first).to match %r{#{def_file}} }
-    it { expect(subject.values.first).to match %r{Foo API} }
+    it { expect(subject.keys).to include "apis" }
+    it { expect(subject).to eql expected }
+    it { expect(subject["apis"].first["file"]).to match %r{#{def_file}} }
+    it { expect(subject["apis"].first["name"]).to match %r{Foo API} }
   end
 
   describe "#api_registers" do
