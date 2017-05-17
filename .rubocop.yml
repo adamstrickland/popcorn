@@ -6,44 +6,45 @@ AllCops:
     - 'bin/*'
     - "*.gemspec"
 
-Style/Documentation:
-  Enabled: false
-Style/FrozenStringLiteralComment:
-  Enabled: false
-Style/EmptyMethod:
-  Enabled: false
-Style/RegexpLiteral:
-  Exclude:
-    - "spec/**/*"
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/SpaceBeforeBlockBraces:
-  Enabled: false
-Style/EachWithObject:
-  Enabled: false
-Style/BracesAroundHashParameters:
-  Enabled: false
-Style/SymbolArray:
-  Exclude:
-    - "lib/popcorn/cli.rb"
-Style/HashSyntax:
-  Exclude:
-    - "Rakefile"
-
 Lint/UselessAssignment:
   Enabled: false
 
-Metrics/BlockLength:
-  Exclude:
-    - "spec/**/*"
 Metrics/AbcSize:
   Exclude:
     - "lib/popcorn/cli.rb"
-Metrics/LineLength:
-  Max: 150
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
 Metrics/ClassLength:
   Max: 200
+Metrics/LineLength:
+  Max: 150
 
 Security/Eval:
   Exclude:
     - "spec/spec_helper.rb"
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/EachWithObject:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/HashSyntax:
+  Exclude:
+    - "Rakefile"
+Style/RegexpLiteral:
+  Exclude:
+    - Guardfile
+    - "spec/**/*"
+Style/SpaceBeforeBlockBraces:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/SymbolArray:
+  Exclude:
+    - "lib/popcorn/cli.rb"
