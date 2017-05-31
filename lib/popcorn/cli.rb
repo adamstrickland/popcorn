@@ -10,9 +10,10 @@ module Popcorn
 
     Expects the following directory structure:
 
-    /apis        # Defines sub-APIs
-    /definitions # Defines model definitions, referenced within the API
-    /paths       # Defines the paths for the APIs
+    ./
+      apis/        # Defines sub-APIs
+      definitions/ # Defines model definitions, referenced within the API
+      paths/       # Defines the paths for the APIs
     EOT
     option :swagger, type: :boolean, aliases: [:s], default: false, desc: "Also generate a swagger.json"
     option :multi, type: :boolean, aliases: [:m, :multifile], default: true, desc: "Generate multi files; false implies only generate swagger.json"
